@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "ams-club-hub",
+  "name": "embitiai",
   "main": ".open-next/worker.js",
   "keep_names": false,
   "compatibility_date": "2026-08-26",
