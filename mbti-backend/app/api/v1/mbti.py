@@ -43,7 +43,15 @@ def submit_mbti_test(
 	db: Session = Depends(get_db),
 ):
 	"""Tiếp nhận câu trả lời của người dùng, tính toán kết quả MBTI và lưu vào database."""
-	test = db.query(Test).filter(Test.id == payload.test_id).first()
+	try:
+		test_id = int(payload.test_id)
+	except (ValueError, TypeError):
+		raise HTTPException(
+			status_code=status.HTTP_400_BAD_REQUEST,
+			detail=f"test_id không hợp lệ: {payload.test_id}",
+		)
+
+	test = db.query(Test).filter(Test.id == test_id).first()
 	if not test:
 		raise HTTPException(
 			status_code=status.HTTP_404_NOT_FOUND,
