@@ -3,13 +3,23 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 from app.core.config import settings
 
-is_postgres = settings.DATABASE_URL.startswith("postgres")
-is_local = "localhost" in settings.DATABASE_URL or "127.0.0.1" in settings.DATABASE_URL
-connect_args={"sslmode": "require"} if (is_postgres and not is_local) else {}
+# --------------------------------------------------------------------------- #
+# Render (and some providers) may supply postgres:// which SQLAlchemy 2.x
+# does not accept; normalise to postgresql://.
+# --------------------------------------------------------------------------- #
+_raw_url = settings.DATABASE_URL
+if _raw_url.startswith("postgres://"):
+    _raw_url = _raw_url.replace("postgres://", "postgresql://", 1)
+
+DATABASE_URL = _raw_url
+
+is_postgres = DATABASE_URL.startswith("postgres")
+is_local = "localhost" in DATABASE_URL or "127.0.0.1" in DATABASE_URL
+connect_args = {"sslmode": "require"} if (is_postgres and not is_local) else {}
 
 # Tạo SQLAlchemy Engine
 engine = create_engine(
-	settings.DATABASE_URL,
+	DATABASE_URL,
 	# pool_pre_ping=True,         # Tự động kiểm tra và kết nối lại nếu DB bị ngắt
 	# pool_size=10,               # Số connection giữ sẵn
 	# max_overflow=15,            # Connection vượt trần tạm thời trước khi chờ pool

@@ -1,10 +1,4 @@
-from app.core.database import Base
-from app.models.mbti_personalities import MBTIPersonality
-from app.models.mbti_dimensions import MBTI_Dimension
-from app.models.questions import Question
-from app.models.tests import Test
-from app.models.submissions import Submission
-
+import os
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
@@ -12,9 +6,29 @@ from sqlalchemy import pool
 
 from alembic import context
 
+from app.core.database import Base
+from app.models.mbti_personalities import MBTIPersonality
+from app.models.mbti_dimensions import MBTI_Dimension
+from app.models.questions import Question
+from app.models.tests import Test
+from app.models.submissions import Submission
+
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
+
+# --------------------------------------------------------------------------- #
+# Override sqlalchemy.url from DATABASE_URL env var (used on Render / production)
+# This ensures alembic always uses the same DB as the app, regardless of what
+# is (or isn't) written in alembic.ini.
+# --------------------------------------------------------------------------- #
+database_url = os.environ.get("DATABASE_URL", "")
+# Render (and some other providers) may supply postgres:// which SQLAlchemy 2.x
+# does not accept; convert to postgresql://.
+if database_url.startswith("postgres://"):
+    database_url = database_url.replace("postgres://", "postgresql://", 1)
+if database_url:
+    config.set_main_option("sqlalchemy.url", database_url)
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
