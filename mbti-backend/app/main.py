@@ -126,7 +126,7 @@ app.include_router(mbti_router, prefix="/api/v1")
 
 @app.api_route("/", methods=["GET", "HEAD"])
 def root():
-	return {"message": "Welcome to AmsClubHub API!"}
+	return {"message": "Welcome to EmBiTiAi API!"}
 
 
 # Chẩn đoán Scheduler - kiểm tra scheduler có đang chạy và có bao nhiêu job + reminder pending

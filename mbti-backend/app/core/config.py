@@ -1,6 +1,13 @@
 from typing import List
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+from sqlalchemy import create_engine
+# from sqlalchemy.pool import NullPool
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env
+load_dotenv()
 
 class Settings(BaseSettings):
 	PROJECT_NAME: str = "MBTI"
@@ -8,8 +15,15 @@ class Settings(BaseSettings):
 	SECRET_KEY: str
 	ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440
 
+	# Fetch variables
+	USER = os.getenv("POSTGRES_USER")
+	PASSWORD = os.getenv("POSTGRES_PASSWORD")
+	HOST = os.getenv("POSTGRES_SERVER")
+	PORT = os.getenv("POSTGRES_PORT")
+	DBNAME = os.getenv("POSTGRES_DB")
+
 	# Database
-	DATABASE_URL: str
+	DATABASE_URL: f"postgresql+psycopg2://{USER}:{PASSWORD}@{HOST}:{PORT}/{DBNAME}?sslmode=require"
 	REDIS_URL: str
 
 	model_config = SettingsConfigDict(
