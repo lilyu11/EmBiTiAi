@@ -5,13 +5,13 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
     <div className="min-h-screen flex flex-col bg-[#f8f9fa] text-slate-800 font-sans">
       {/* Top Navigation Bar */}
       <header className="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
-        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div className="w-full max-w-[1600px] mx-auto px-4 h-16 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 text-xl font-bold text-slate-800 hover:opacity-90">
             <span className="w-8 h-8 rounded-full bg-gradient-to-tr from-emerald-500 via-teal-500 to-purple-600 flex items-center justify-center text-white text-xs font-black">
-              16
+              67
             </span>
-            <span className="tracking-tight text-slate-900">16Personalities</span>
+            <span className="tracking-tight text-slate-900">MEMAYBEL</span>
           </Link>
 
           {/* Navigation Links */}
@@ -40,7 +40,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 max-w-4xl w-full mx-auto px-4 py-8 md:py-12">
+      <main className="flex-1 w-full max-w-[1400px] mx-auto px-4 py-8 md:py-12">
         {children}
       </main>
 

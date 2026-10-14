@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Dict, List
+from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, ConfigDict, Field
 
 
@@ -30,16 +30,16 @@ class AxisDetail(BaseModel):
 
 
 class ResultOut(BaseModel):
-    """Schema kết quả phân tích MBTI hoàn chỉnh."""
-    submission_id: str
-    personality_code: str
+    submission_id: str | int
+    personality_code: str  # e.g., 'INTJ-A'
+    base_code: Optional[str] = None  # e.g., 'INTJ'
+    identity_variant: Optional[str] = None  # e.g., 'Assertive'
     title: str
     validity_score: float
     spectrum: Dict[str, AxisDetail]
-    strengths: List[str]
-    weaknesses: List[str]
-    created_at: datetime
-
+    summary: Optional[str] = None
+    modules: Optional[Dict[str, Any]] = None
+    created_at: Optional[datetime] = None
     model_config = ConfigDict(from_attributes=True)
 
 

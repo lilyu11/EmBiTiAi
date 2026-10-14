@@ -22,5 +22,11 @@ export const mbtiApi = {
       throw new Error('Test ID not found in localStorage.');
     }
     return testId;
-  }
+  },
+
+  // Lấy kết quả bài làm dựa trên submission_id
+  getSubmissionResult: async (submissionId: string): Promise<SubmitResponse> => {
+    const response = await api.get(`/mbti/result/${submissionId}`);
+    return response.data;
+  },
 };

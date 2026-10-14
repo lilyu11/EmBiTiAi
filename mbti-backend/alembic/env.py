@@ -1,3 +1,10 @@
+from app.core.database import Base
+from app.models.mbti_personalities import MBTIPersonality
+from app.models.mbti_dimensions import MBTI_Dimension
+from app.models.questions import Question
+from app.models.tests import Test
+from app.models.submissions import Submission
+
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
@@ -18,7 +25,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = None
+target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

@@ -57,3 +57,9 @@ Thumbs.db
 DBeaver/
 
 .claude/
+
+mbti_beta_questions.json
+mbti_detailed_personalities.json
+mbti_seed_personalities.py
+mbti_seed_questions.py
+testing_score_service.py

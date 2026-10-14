@@ -11,6 +11,7 @@ from app.models.questions import Question
 from app.models.tests import Test
 from app.models.mbti_dimensions import MBTI_Dimension
 from app.models.submissions import Submission
+from app.models.mbti_dimensions import MBTI_Dimension
 
 
 def import_questions_from_json(

@@ -1,8 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Question, SubmitResponse, ResultOut } from '@/types/mbti';
 import { mbtiApi } from '@/lib/api/mbti';
+import ResultView from '@/components/mbti/ResultView';
 
 const LIKERT_OPTIONS = [
 	{ label: 'Rất không đồng ý', value: -2, color: 'bg-red-500' },
@@ -19,7 +21,8 @@ export default function MBTITestPage() {
 	const [submitting, setSubmitting] = useState<boolean>(false);
 	const [response, setResponse] = useState<SubmitResponse | null>(null);
 	const [error, setError] = useState<string | null>(null);
-
+	const router = useRouter();
+	
 	useEffect(() => {
 		const fetchQuestions = async () => {
 			try {
@@ -56,7 +59,16 @@ export default function MBTITestPage() {
 				})),
 			};
 			const res = await mbtiApi.submitAnswers(payload);
-			setResponse(res);
+
+			// Lấy submission_id từ response trả về từ backend
+			const submissionId = res.submission_id || res.result?.submission_id;
+
+			if (submissionId) {
+				// Chuyển hướng sang trang kết quả riêng biệt
+				router.push(`/mbti/result/${submissionId}`);
+			} else {
+				setError('Không nhận được mã kết quả từ hệ thống.');
+			}
 		} catch (err: any) {
 			setError(err.response?.data?.detail || 'Có lỗi xảy ra khi nộp bài.');
 		} finally {
@@ -103,55 +115,6 @@ export default function MBTITestPage() {
 				className="w-full py-4 bg-blue-600 text-white text-lg font-semibold rounded-xl hover:bg-blue-700 disabled:opacity-50"
 			>
 				{submitting ? 'Đang tính toán kết quả...' : 'Hoàn thành & Xem kết quả'}
-			</button>
-		</div>
-	);
-}
-
-// COMPONENT HIỂN THỊ KẾT QUẢ BÀI TEST
-function ResultView({ result }: { result: ResultOut }) {
-	return (
-		<div className="max-w-2xl mx-auto p-6 space-y-6 bg-white border rounded-2xl shadow-md my-8">
-			<div className="text-center space-y-2">
-				<span className="text-sm uppercase tracking-wider text-gray-500">Kết quả MBTI của bạn</span>
-				<h1 className="text-4xl font-extrabold text-blue-600">{result.personality_code}</h1>
-				<h2 className="text-xl font-medium text-gray-700">{result.title}</h2>
-				<p className="text-xs text-gray-400">Độ tin cậy bài làm: {result.validity_score}%</p>
-			</div>
-
-			<hr />
-
-			<div className="space-y-5">
-				<h3 className="font-semibold text-lg">Tỷ lệ các trục tính cách:</h3>
-
-				{Object.entries(result?.spectrum || {}).map(([axis, data]) => (
-					<div key={axis} className="space-y-1">
-						<div className="flex justify-between text-sm font-medium">
-							<span>{data.left_code} ({data.left_percentage.toFixed(1)}%)</span>
-							<span className="font-bold">{axis}</span>
-							<span>{data.right_code} ({data.right_percentage.toFixed(1)}%)</span>
-						</div>
-
-						<div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden flex">
-							<div
-								className="bg-indigo-500 h-full transition-all"
-								style={{ width: `${data.left_percentage}%` }}
-							/>
-							<div
-								className="bg-emerald-500 h-full transition-all"
-								style={{ width: `${data.right_percentage}%` }}
-							/>
-						</div>
-					</div>
-				))}
-			</div>
-
-			<button
-				type="button"
-				onClick={() => window.location.reload()}
-				className="w-full py-3 bg-gray-100 text-gray-800 rounded-xl hover:bg-gray-200 font-medium"
-			>
-				Làm lại bài test
 			</button>
 		</div>
 	);

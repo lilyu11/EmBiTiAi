@@ -4,7 +4,8 @@
     "content": "Trong các buổi sự kiện hoặc networking, bạn thường là người chủ động tiến tới bắt chuyện với những người chưa từng quen.",
     "weights": {
       "EI": 1.2,
-      "JP": 0.2
+      "JP": 0.2,
+      "AT": -0.3
     }
   },
   {
@@ -41,7 +42,8 @@
     "content": "Trong một nhóm người lạ, bạn thường giữ im lặng quan sát và đợi người khác bắt chuyện trước.",
     "weights": {
       "EI": -1.0,
-      "JP": -0.2
+      "JP": -0.2,
+      "AT": 0.3
     }
   },
   {
@@ -63,7 +65,8 @@
     "order": 9,
     "content": "Bạn không hề cảm thấy ngần ngại, thậm chí còn thích thú khi vô tình trở thành trung tâm của sự chú ý.",
     "weights": {
-      "EI": 1.0
+      "EI": 1.0,
+      "AT": -0.4
     }
   },
   {
@@ -78,14 +81,16 @@
     "order": 11,
     "content": "Trong lớp học hay cuộc họp, bạn thường là người đầu tiên giơ tay phát biểu hoặc đưa ra ý kiến trả lời.",
     "weights": {
-      "EI": 1.0
+      "EI": 1.0,
+      "AT": -0.3
     }
   },
   {
     "order": 12,
     "content": "Bạn thà nhắn tin giải quyết công việc cả ngày còn hơn là phải nhấc máy lên gọi điện thoại trực tiếp.",
     "weights": {
-      "EI": -0.7
+      "EI": -0.7,
+      "AT": 0.2
     }
   },
   {
@@ -122,7 +127,8 @@
     "content": "Bạn thường suy nghĩ cẩn thận và sắp xếp ý tứ trong đầu trước khi thực sự mở miệng nói ra một điều gì đó.",
     "weights": {
       "EI": -1.0,
-      "JP": -0.2
+      "JP": -0.2,
+      "AT": 0.3
     }
   },
   {
@@ -175,7 +181,8 @@
     "content": "Khi nhận một bản kế hoạch, bạn có thói quen soi rất kỹ các chi tiết tiểu tiết (lỗi type, format, số liệu nhỏ) thay vì chỉ nhìn bức tranh tổng thể.",
     "weights": {
       "SN": -1.0,
-      "JP": -0.3
+      "JP": -0.3,
+      "AT": 0.4
     }
   },
   {
@@ -219,7 +226,8 @@
     "content": "Bạn cảm thấy khó chịu khi người khác giao việc kiểu chung chung mà không có các tiêu chí đo lường cụ thể.",
     "weights": {
       "SN": -1.0,
-      "JP": -0.2
+      "JP": -0.2,
+      "AT": 0.3
     }
   },
   {
@@ -292,7 +300,8 @@
     "order": 40,
     "content": "Bạn thà nói ra sự thật mất lòng để giải quyết triệt để vấn đề còn hơn là dùng lời lẽ hoa mỹ để bao biện.",
     "weights": {
-      "TF": -1.2
+      "TF": -1.2,
+      "AT": -0.3
     }
   },
   {
@@ -315,14 +324,16 @@
     "order": 43,
     "content": "Bạn dễ dàng đặt mình vào vị trí của người khác để thấu hiểu nỗi đau của họ, đôi khi đến mức tự làm bản thân buồn lây.",
     "weights": {
-      "TF": 1.2
+      "TF": 1.2,
+      "AT": 0.5
     }
   },
   {
     "order": 44,
     "content": "Trong một cuộc cãi vã, bạn có khả năng 'đóng băng' cảm xúc tạm thời để lùi lại phân tích xem ai đúng ai sai một cách khách quan.",
     "weights": {
-      "TF": -1.0
+      "TF": -1.0,
+      "AT": -0.4
     }
   },
   {
@@ -330,7 +341,8 @@
     "content": "Tâm trạng của bạn rất dễ bị ảnh hưởng bởi thái độ hoặc năng lượng của những người xung quanh tỏa ra.",
     "weights": {
       "TF": 0.7,
-      "EI": 0.3
+      "EI": 0.3,
+      "AT": 0.6
     }
   },
   {
@@ -345,7 +357,8 @@
     "order": 47,
     "content": "Bạn sẵn sàng nhượng bộ hoặc chịu thiệt một chút để tránh khỏi những cuộc xung đột, đối đầu căng thẳng không đáng có.",
     "weights": {
-      "TF": 1.0
+      "TF": 1.0,
+      "AT": 0.3
     }
   },
   {
@@ -353,7 +366,8 @@
     "content": "Bạn thích đóng vai 'ác' để phản biện lại các ý kiến, nhằm thử thách tính logic của một kế hoạch.",
     "weights": {
       "TF": -1.2,
-      "SN": 0.3
+      "SN": 0.3,
+      "AT": -0.3
     }
   },
   {
@@ -374,21 +388,24 @@
     "order": 51,
     "content": "Bạn thường cảm thấy áy náy và tự dằn vặt rất lâu khi phải từ chối lời nhờ vả của một người bạn.",
     "weights": {
-      "TF": 1.0
+      "TF": 1.0,
+      "AT": 0.6
     }
   },
   {
     "order": 52,
     "content": "Bạn đón nhận những lời chỉ trích công việc một cách khá nhẹ nhàng vì cho rằng đó là góp ý công việc, không phải ghét bỏ cá nhân.",
     "weights": {
-      "TF": -1.0
+      "TF": -1.0,
+      "AT": -0.6
     }
   },
   {
     "order": 53,
     "content": "Đôi khi bạn chủ động nhận lỗi về mình ngay cả khi không hoàn toàn sai, cốt chỉ để câu chuyện kết thúc êm đẹp.",
     "weights": {
-      "TF": 1.2
+      "TF": 1.2,
+      "AT": 0.4
     }
   },
   {
@@ -409,7 +426,8 @@
     "order": 56,
     "content": "Lòng tự trọng của bạn gắn liền với năng lực cá nhân, sự thông minh và thành tựu bạn đạt được hơn là việc được bao nhiêu người yêu mến.",
     "weights": {
-      "TF": -0.7
+      "TF": -0.7,
+      "AT": -0.3
     }
   },
   {
@@ -423,7 +441,8 @@
     "order": 58,
     "content": "Deadline đối với bạn là ranh giới bất khả xâm phạm, bạn luôn cố gắng hoàn thành công việc trước thời hạn ít nhất 1-2 ngày.",
     "weights": {
-      "JP": -1.2
+      "JP": -1.2,
+      "AT": 0.3
     }
   },
   {
@@ -431,7 +450,8 @@
     "content": "Bạn đặc biệt yêu thích những chuyến đi phượt ngẫu hứng, chỉ việc xách ba lô lên và đi mà không cần đặt trước khách sạn hay vé tàu.",
     "weights": {
       "JP": 1.2,
-      "SN": 0.2
+      "SN": 0.2,
+      "AT": -0.3
     }
   },
   {
@@ -460,7 +480,8 @@
     "order": 63,
     "content": "Trí não của bạn chỉ thực sự bùng nổ và đạt công suất tối đa khi deadline đang kề sát cổ, như kiểu 'nước đến chân mới nhảy'.",
     "weights": {
-      "JP": 1.2
+      "JP": 1.2,
+      "AT": 0.3
     }
   },
   {
@@ -482,7 +503,8 @@
     "order": 66,
     "content": "Bạn không thể thực sự xõa (thư giãn) nếu như trong danh sách việc cần làm hôm nay vẫn còn một task chưa được gạch đi.",
     "weights": {
-      "JP": -1.2
+      "JP": -1.2,
+      "AT": 0.5
     }
   },
   {
@@ -496,7 +518,8 @@
     "order": 68,
     "content": "Bạn luôn cố gắng đến sớm hơn giờ hẹn ít nhất 10-15 phút để đề phòng mọi sự cố bất trắc trên đường.",
     "weights": {
-      "JP": -1.0
+      "JP": -1.0,
+      "AT": 0.3
     }
   },
   {
@@ -519,14 +542,16 @@
     "content": "Bạn có thói quen bắt đầu dở dang rất nhiều sở thích hoặc dự án cùng lúc nhưng lại hiếm khi kiên trì đi đến tận cùng của một cái nào.",
     "weights": {
       "JP": 1.0,
-      "SN": 0.3
+      "SN": 0.3,
+      "AT": 0.4
     }
   },
   {
     "order": 72,
     "content": "Bạn mong muốn nhanh chóng đưa ra được quyết định cuối cùng để đóng lại vấn đề và chuyển sang việc khác.",
     "weights": {
-      "JP": -1.0
+      "JP": -1.0,
+      "AT": -0.3
     }
   },
   {
@@ -541,21 +566,24 @@
     "content": "Bạn cực kỳ ghét những sự kiện bất ngờ ngoài dự kiến. Bạn muốn biết rõ mình đang bước vào cái gì.",
     "weights": {
       "JP": -1.0,
-      "SN": -0.3
+      "SN": -0.3,
+      "AT": 0.4
     }
   },
   {
     "order": 75,
     "content": "Bạn phản ứng cực kỳ nhanh nhạy và thích nghi dễ dàng khi hoàn cảnh thay đổi đột ngột làm phá sản kế hoạch ban đầu.",
     "weights": {
-      "JP": 1.2
+      "JP": 1.2,
+      "AT": -0.5
     }
   },
   {
     "order": 76,
     "content": "Nếu có một chuyến bay vào cuối tuần, bạn thường chuẩn bị, đóng gói hành lý và kiểm tra giấy tờ từ giữa tuần để đảm bảo an tâm.",
     "weights": {
-      "JP": -1.0
+      "JP": -1.0,
+      "AT": 0.3
     }
   }
 ]
