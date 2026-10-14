@@ -15,7 +15,13 @@ DATABASE_URL = _raw_url
 
 is_postgres = DATABASE_URL.startswith("postgres")
 is_local = "localhost" in DATABASE_URL or "127.0.0.1" in DATABASE_URL
-connect_args = {"sslmode": "require"} if (is_postgres and not is_local) else {}
+
+# SSL: append sslmode=require to the URL for remote Postgres (Supabase / Render).
+# psycopg v3 reads libpq-style params from the DSN itself, so embedding in the
+# URL is the most reliable approach across both psycopg2 and psycopg v3.
+if is_postgres and not is_local and "sslmode" not in DATABASE_URL:
+    separator = "&" if "?" in DATABASE_URL else "?"
+    DATABASE_URL = f"{DATABASE_URL}{separator}sslmode=require"
 
 # Tạo SQLAlchemy Engine
 engine = create_engine(
@@ -25,7 +31,6 @@ engine = create_engine(
 	# max_overflow=15,            # Connection vượt trần tạm thời trước khi chờ pool
 	# pool_timeout=20,            # Giảm thời gian chờ khi pool cạn (default 30s)
 	# pool_recycle=1800,          # Tái tạo connection sau 30 phút - dưới giới hạn idle của Supabase
-	connect_args=connect_args,  # SSL cho Postgres trên Supabase
 	)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

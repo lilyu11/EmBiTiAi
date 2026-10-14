@@ -27,6 +27,10 @@ database_url = os.environ.get("DATABASE_URL", "")
 # does not accept; convert to postgresql://.
 if database_url.startswith("postgres://"):
     database_url = database_url.replace("postgres://", "postgresql://", 1)
+# Ensure SSL for remote Postgres (Supabase / Render)
+if database_url.startswith("postgres") and "localhost" not in database_url and "127.0.0.1" not in database_url and "sslmode" not in database_url:
+    separator = "&" if "?" in database_url else "?"
+    database_url = f"{database_url}{separator}sslmode=require"
 if database_url:
     config.set_main_option("sqlalchemy.url", database_url)
 
