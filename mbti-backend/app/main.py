@@ -67,7 +67,8 @@ origins = [
 	"http://localhost:3000",    # React / Next.js mặc định
 	"http://localhost:5173",    # Vite (React / Vue) mặc định
 	"http://localhost:8000",    # FastAPI Swagger UI mặc định
-	"*"
+	"https://embitiai.hadung29112009.workers.dev",
+	"https://embitiai.onrender.com"
 	]
 
 # Security Headers Middleware
