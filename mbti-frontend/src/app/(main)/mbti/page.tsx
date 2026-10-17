@@ -15,8 +15,8 @@ const LIKERT_OPTIONS = [
 ];
 
 const QUESTION_LIMIT_OPTIONS: Array<{ count: number | 'all'; title: string; time: string; desc: string }> = [
-	{ count: 30, title: '30 Câu hỏi', time: '~5 phút', desc: 'Trắc nghiệm nhanh, nắm bắt xu hướng cốt lõi.' },
-	{ count: 45, title: '45 Câu hỏi', time: '~8 phút', desc: 'Độ dài tiêu chuẩn, cân bằng độ chính xác.' },
+	{ count: 20, title: '20 Câu hỏi', time: '~4 phút', desc: 'Trắc nghiệm nhanh, nắm bắt xu hướng cốt lõi.' },
+	{ count: 40, title: '40 Câu hỏi', time: '~8 phút', desc: 'Độ dài tiêu chuẩn, cân bằng độ chính xác.' },
 	{ count: 60, title: '60 Câu hỏi', time: '~12 phút', desc: 'Phân tích chi tiết và sâu sắc các trục nhận thức.' },
 	{ count: 'all', title: 'Tất cả câu hỏi', time: '~15 phút', desc: 'Độ chính xác cao với tất cả câu hỏi hệ thống.' },
 ];
@@ -122,6 +122,7 @@ export default function MBTITestPage() {
 	};
 
 	const answeredCount = Object.keys(answers).length;
+	const remainingCount = questions.length - answeredCount;
 	const progressPercentage = questions.length > 0 ? Math.round((answeredCount / questions.length) * 100) : 0;
 
 	const handleSubmit = async () => {
@@ -239,44 +240,108 @@ export default function MBTITestPage() {
 	}
 
 	return (
-		<div className="max-w-3xl mx-auto space-y-10 pb-28">
-			{/* Header & Progress */}
-			<div className="bg-card border border-border p-6 sm:p-8 rounded-3xl shadow-xs space-y-5">
-				<div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-					<div>
-						<div className="mb-2">
-							<button
-								type="button"
-								onClick={() => setSelectedLimit(null)}
-								className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors bg-secondary px-3 py-1.5 rounded-full cursor-pointer"
-							>
-								<ArrowLeft className="w-3.5 h-3.5" />
-								<span>Đổi số câu ({questions.length} câu)</span>
-							</button>
-						</div>
-						<h1 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
-							Bài Trắc Nghiệm MBTI
-						</h1>
-						<p className="text-muted-foreground text-sm mt-1">
-							Chọn mức độ phù hợp với mỗi nhận định. Hãy chọn theo cảm nhận tự nhiên của bạn.
-						</p>
-					</div>
-					<span className="text-xs font-bold px-3.5 py-1.5 rounded-full bg-secondary text-secondary-foreground border border-border/80 self-start sm:self-auto">
-						Đã trả lời: {answeredCount}/{questions.length}
+		<div className="max-w-4xl mx-auto space-y-10 pb-28 relative">
+			{/* Floating / Sticky Circular Progress Widget on the Right */}
+			<div className="fixed right-6 top-32 z-50 hidden xl:flex flex-col items-center text-center bg-card/95 backdrop-blur-md border border-border p-5 rounded-3xl shadow-xl space-y-3 w-36 animate-in fade-in slide-in-from-right-4 duration-300">
+				{/* Top text: Số câu còn lại */}
+				<div className="text-xs font-bold text-foreground">
+					{remainingCount === 0 ? 'Đã hoàn tất!' : `Còn ${remainingCount} câu hỏi`}
+				</div>
+
+				{/* Middle: Larger circular progress */}
+				<div className="relative w-20 h-20 flex items-center justify-center">
+					<svg className="w-full h-full -rotate-90" viewBox="0 0 48 48">
+						<circle
+							cx="24"
+							cy="24"
+							r="20"
+							className="text-border"
+							strokeWidth="4"
+							stroke="currentColor"
+							fill="none"
+						/>
+						<circle
+							cx="24"
+							cy="24"
+							r="20"
+							className="text-primary transition-all duration-500 ease-out"
+							strokeWidth="4"
+							strokeDasharray="125.6"
+							strokeDashoffset={125.6 - (125.6 * progressPercentage) / 100}
+							strokeLinecap="round"
+							stroke="currentColor"
+							fill="none"
+						/>
+					</svg>
+					<span className="absolute text-sm font-extrabold text-foreground">
+						{remainingCount}
 					</span>
 				</div>
 
-				{/* Progress bar */}
-				<div className="space-y-2 pt-2">
-					<div className="flex justify-between text-xs font-semibold text-muted-foreground">
-						<span>Tiến độ hoàn thành</span>
-						<span>{progressPercentage}%</span>
+				{/* Bottom text: % */}
+				<div className="text-[11px] text-muted-foreground font-semibold">
+					{progressPercentage}%
+				</div>
+			</div>
+
+			{/* Header */}
+			<div className="bg-card border border-border p-6 sm:p-8 rounded-3xl shadow-xs flex flex-col sm:flex-row items-center justify-between gap-6">
+				<div className="space-y-1.5 text-center sm:text-left">
+					<div className="mb-2">
+						<button
+							type="button"
+							onClick={() => setSelectedLimit(null)}
+							className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors bg-secondary px-3 py-1.5 rounded-full cursor-pointer"
+						>
+							<ArrowLeft className="w-3.5 h-3.5" />
+							<span>Đổi số câu ({questions.length} câu)</span>
+						</button>
 					</div>
-					<div className="w-full h-2.5 bg-secondary rounded-full overflow-hidden">
-						<div
-							className="h-full bg-primary rounded-full transition-all duration-300"
-							style={{ width: `${progressPercentage}%` }}
-						/>
+					<h1 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
+						Bài Trắc Nghiệm MBTI
+					</h1>
+					<p className="text-muted-foreground text-sm">
+						Chọn mức độ phù hợp với mỗi nhận định theo cảm nhận tự nhiên của bạn.
+					</p>
+				</div>
+
+				{/* Mobile / Inline Circular Counter */}
+				<div className="flex xl:hidden items-center gap-4 bg-secondary/50 border border-border px-5 py-3.5 rounded-2xl shrink-0">
+					<div className="relative w-12 h-12 flex items-center justify-center">
+						<svg className="w-full h-full -rotate-90" viewBox="0 0 48 48">
+							<circle
+								cx="24"
+								cy="24"
+								r="20"
+								className="text-border"
+								strokeWidth="4"
+								stroke="currentColor"
+								fill="none"
+							/>
+							<circle
+								cx="24"
+								cy="24"
+								r="20"
+								className="text-primary transition-all duration-500 ease-out"
+								strokeWidth="4"
+								strokeDasharray="125.6"
+								strokeDashoffset={125.6 - (125.6 * progressPercentage) / 100}
+								strokeLinecap="round"
+								stroke="currentColor"
+								fill="none"
+							/>
+						</svg>
+						<span className="absolute text-xs font-extrabold text-foreground">
+							{remainingCount}
+						</span>
+					</div>
+					<div className="text-left">
+						<div className="text-xs font-bold text-foreground">
+							{remainingCount === 0 ? 'Đã hoàn tất!' : `Còn ${remainingCount} câu`}
+						</div>
+						<div className="text-[11px] text-muted-foreground">
+							{answeredCount} / {questions.length} đã trả lời ({progressPercentage}%)
+						</div>
 					</div>
 				</div>
 			</div>

@@ -24,7 +24,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
               Trang chủ
             </Link>
             <Link href="/mbti" className="hover:text-primary transition-colors">
-              Làm bài Test
+              MBTI Test
             </Link>
           </nav>
 

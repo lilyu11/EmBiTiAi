@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import {
 	CheckCircle2,
@@ -65,8 +65,41 @@ const AXIS_NAMES: Record<string, { name: string; leftLabel: string; rightLabel: 
 	AT: { name: "Bản sắc", leftLabel: "Quyết đoán", rightLabel: "Cầu tiến" },
 };
 
+const getValidityLabel = (score: number) => {
+	if (score >= 75) return 'Cao';
+	if (score >= 50) return 'Trung bình';
+	return 'Thấp';
+};
+
 export default function ResultView({ result }: { result: ResultOut }) {
 	const [activeTab, setActiveTab] = useState<string>("traits");
+
+	useEffect(() => {
+		const sectionIds = ['traits', 'career', 'growth', 'relationships'];
+		const observerCallback: IntersectionObserverCallback = (entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					setActiveTab(entry.target.id);
+				}
+			});
+		};
+
+		const observerOptions: IntersectionObserverInit = {
+			root: null,
+			rootMargin: '-20% 0px -60% 0px',
+			threshold: 0,
+		};
+
+		const observer = new IntersectionObserver(observerCallback, observerOptions);
+		sectionIds.forEach((id) => {
+			const el = document.getElementById(id);
+			if (el) observer.observe(el);
+		});
+
+		return () => {
+			observer.disconnect();
+		};
+	}, []);
 
 	const modules = result.modules || {};
 	const traitsModule = modules.personality_traits;
@@ -109,7 +142,7 @@ export default function ResultView({ result }: { result: ResultOut }) {
 
 				<div className="inline-flex items-center gap-2 text-xs text-muted-foreground bg-secondary/80 px-3.5 py-1.5 rounded-full border border-border">
 					<ShieldCheck className="w-4 h-4 text-primary" />
-					Độ tin cậy bài làm: <span className="font-bold text-foreground">{result.validity_score}%</span>
+					Độ tin cậy bài làm: <span className="font-bold text-foreground">{getValidityLabel(result.validity_score)}</span>
 				</div>
 			</div>
 
