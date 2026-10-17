@@ -75,7 +75,7 @@ export default function MBTITestPage() {
 		});
 
 		const axes = Object.keys(axisMap);
-		
+
 		// Xáo trộn ngẫu nhiên câu hỏi trong từng trục trước
 		axes.forEach((ax) => {
 			axisMap[ax].sort(() => Math.random() - 0.5);
@@ -241,48 +241,7 @@ export default function MBTITestPage() {
 
 	return (
 		<div className="max-w-4xl mx-auto space-y-10 pb-28 relative">
-			{/* Floating / Sticky Circular Progress Widget on the Right */}
-			<div className="fixed right-6 top-32 z-50 hidden xl:flex flex-col items-center text-center bg-card/95 backdrop-blur-md border border-border p-5 rounded-3xl shadow-xl space-y-3 w-36 animate-in fade-in slide-in-from-right-4 duration-300">
-				{/* Top text: Số câu còn lại */}
-				<div className="text-xs font-bold text-foreground">
-					{remainingCount === 0 ? 'Đã hoàn tất!' : `Còn ${remainingCount} câu hỏi`}
-				</div>
 
-				{/* Middle: Larger circular progress */}
-				<div className="relative w-20 h-20 flex items-center justify-center">
-					<svg className="w-full h-full -rotate-90" viewBox="0 0 48 48">
-						<circle
-							cx="24"
-							cy="24"
-							r="20"
-							className="text-border"
-							strokeWidth="4"
-							stroke="currentColor"
-							fill="none"
-						/>
-						<circle
-							cx="24"
-							cy="24"
-							r="20"
-							className="text-primary transition-all duration-500 ease-out"
-							strokeWidth="4"
-							strokeDasharray="125.6"
-							strokeDashoffset={125.6 - (125.6 * progressPercentage) / 100}
-							strokeLinecap="round"
-							stroke="currentColor"
-							fill="none"
-						/>
-					</svg>
-					<span className="absolute text-sm font-extrabold text-foreground">
-						{remainingCount}
-					</span>
-				</div>
-
-				{/* Bottom text: % */}
-				<div className="text-[11px] text-muted-foreground font-semibold">
-					{progressPercentage}%
-				</div>
-			</div>
 
 			{/* Header */}
 			<div className="bg-card border border-border p-6 sm:p-8 rounded-3xl shadow-xs flex flex-col sm:flex-row items-center justify-between gap-6">
@@ -364,11 +323,10 @@ export default function MBTITestPage() {
 							key={q.id}
 							role="group"
 							aria-label={`Câu hỏi ${index + 1}`}
-							className={`p-6 sm:p-8 border rounded-3xl bg-card transition-all space-y-6 shadow-2xs ${
-								isAnswered
+							className={`p-6 sm:p-8 border rounded-3xl bg-card transition-all space-y-6 shadow-2xs ${isAnswered
 									? 'border-primary/50 ring-1 ring-primary/10 bg-card'
 									: 'border-border hover:border-border/80'
-							}`}
+								}`}
 						>
 							<div className="flex items-start gap-4">
 								<span className="w-8 h-8 rounded-xl bg-secondary text-secondary-foreground text-xs font-extrabold flex items-center justify-center shrink-0 mt-0.5">
@@ -390,11 +348,10 @@ export default function MBTITestPage() {
 											role="radio"
 											aria-checked={isSelected}
 											onClick={() => handleSelectOption(q.id, opt.value)}
-											className={`px-3 py-3.5 text-xs font-semibold rounded-2xl border transition-all flex flex-col items-center justify-center gap-1.5 text-center cursor-pointer ${
-												isSelected
+											className={`px-3 py-3.5 text-xs font-semibold rounded-2xl border transition-all flex flex-col items-center justify-center gap-1.5 text-center cursor-pointer ${isSelected
 													? 'bg-primary text-primary-foreground border-primary shadow-xs scale-[1.02]'
 													: 'bg-background border-border text-muted-foreground hover:bg-secondary/60 hover:text-foreground hover:border-border'
-											}`}
+												}`}
 										>
 											<span className="leading-tight">{opt.label}</span>
 										</button>
@@ -406,11 +363,36 @@ export default function MBTITestPage() {
 				})}
 			</div>
 
-			{/* Sticky Submit Bar */}
+			{/* Sticky Submit Bar with Circular Progress Ring */}
 			<div className="sticky bottom-6 z-40 bg-card/95 backdrop-blur-md border border-border p-4 sm:p-5 rounded-3xl shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4">
 				<div className="flex items-center gap-3.5">
-					<div className="w-10 h-10 rounded-2xl bg-secondary text-foreground flex items-center justify-center font-bold text-sm border border-border">
-						{progressPercentage}%
+					<div className="relative w-12 h-12 flex items-center justify-center shrink-0">
+						<svg className="w-full h-full -rotate-90" viewBox="0 0 48 48">
+							<circle
+								cx="24"
+								cy="24"
+								r="20"
+								className="text-border"
+								strokeWidth="4"
+								stroke="currentColor"
+								fill="none"
+							/>
+							<circle
+								cx="24"
+								cy="24"
+								r="20"
+								className="text-primary transition-all duration-500 ease-out"
+								strokeWidth="4"
+								strokeDasharray="125.6"
+								strokeDashoffset={125.6 - (125.6 * progressPercentage) / 100}
+								strokeLinecap="round"
+								stroke="currentColor"
+								fill="none"
+							/>
+						</svg>
+						<span className="absolute text-xs font-extrabold text-foreground">
+							{remainingCount}
+						</span>
 					</div>
 					<div>
 						<p className="font-bold text-foreground text-sm">
