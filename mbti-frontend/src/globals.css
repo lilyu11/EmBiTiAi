@@ -4,6 +4,19 @@
 
 html {
 	scrollbar-gutter: stable;
+	scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+	*, *::before, *::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
 }
 
 @custom-variant dark (&:is(.dark *));
@@ -52,89 +65,77 @@ html {
 	--radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* LIGHT MODE (Facebook Style: Nền xám ấm #f0f2f5, Card trắng, Primary xanh Facebook) */
-:root {
-	--background: oklch(0.968 0.003 264.052);
-	/* #f0f2f5 - Xám ấm dịu mắt */
-	--foreground: oklch(0.18 0 0);
-	/* #1c1e21 - Đen nhẹ */
-	--card: oklch(0.99 0.001 264);
-	/* #fafbfc - Card xám nhẹ thay vì trắng thuần, hài hòa với nền */
-	--card-foreground: oklch(0.18 0 0);
-	--popover: oklch(1 0 0);
-	--popover-foreground: oklch(0.18 0 0);
-	--primary: oklch(0.574 0.195 264.364);
-	/* #1877f2 - Xanh Facebook đặc trưng */
-	--primary-foreground: oklch(1 0 0);
-	--secondary: oklch(0.96 0 0);
-	--secondary-foreground: oklch(0.18 0 0);
-	--muted: oklch(0.96 0.002 264);
-	--muted-foreground: oklch(0.48 0.01 264);
-	/* #65676b - Xám phụ Facebook */
-	--accent: oklch(0.96 0.002 264);
-	--accent-foreground: oklch(0.18 0 0);
-	--destructive: oklch(0.577 0.245 27.325);
-	--border: oklch(0.915 0.003 264);
-	/* #e4e6eb - Viền xám rõ */
-	--input: oklch(0.915 0.003 264);
-	--ring: oklch(0.574 0.195 264.364);
-	--chart-1: oklch(0.574 0.195 264.364);
-	--chart-2: oklch(0.556 0 0);
-	--chart-3: oklch(0.439 0 0);
-	--chart-4: oklch(0.371 0 0);
-	--chart-5: oklch(0.269 0 0);
-	--radius: 0.75rem;
+/* LIGHT MODE: PURE CLEAN WHITE CANVAS WITH SUBTLE WARM SAGE ACCENTS */
+:root, .root, .light {
+	--background: #FFFFFF;
+	--foreground: #1E2923;
+	--card: #FFFFFF;
+	--card-foreground: #1E2923;
+	--popover: #FFFFFF;
+	--popover-foreground: #1E2923;
+	--primary: #3B6E5F;
+	--primary-foreground: #FFFFFF;
+	--secondary: #F2F5F3;
+	--secondary-foreground: #2C3E37;
+	--muted: #F2F5F3;
+	--muted-foreground: #64746B;
+	--accent: #E8F0EC;
+	--accent-foreground: #1F362D;
+	--destructive: #B33928;
+	--border: #E2E8E4;
+	--input: #E2E8E4;
+	--ring: #3B6E5F;
+	--chart-1: #3B6E5F;
+	--chart-2: #588A7C;
+	--chart-3: #2A5245;
+	--chart-4: #7DA69B;
+	--chart-5: #1F3B32;
+	--radius: 0.875rem;
 
-	--sidebar: oklch(1 0 0);
-	--sidebar-foreground: oklch(0.18 0 0);
-	--sidebar-primary: oklch(0.574 0.195 264.364);
-	--sidebar-primary-foreground: oklch(1 0 0);
-	--sidebar-accent: oklch(0.96 0.002 264);
-	--sidebar-accent-foreground: oklch(0.18 0 0);
-	--sidebar-border: oklch(0.915 0.003 264);
-	--sidebar-ring: oklch(0.574 0.195 264.364);
+	--sidebar: #FFFFFF;
+	--sidebar-foreground: #1E2923;
+	--sidebar-primary: #3B6E5F;
+	--sidebar-primary-foreground: #FFFFFF;
+	--sidebar-accent: #E8F0EC;
+	--sidebar-accent-foreground: #1F362D;
+	--sidebar-border: #E2E8E4;
+	--sidebar-ring: #3B6E5F;
 }
 
-/* DARK MODE (Facebook Style: Nền xám đen ấm nhẹ hơn, Card sáng hơn, Viền dịu) */
+/* DARK MODE: DEEP CHARCOAL & EVERGREEN */
 .dark {
-	--background: oklch(0.18 0.004 264.052);
-	/* #242526 - Nhẹ hơn, xám đen ấm */
-	--foreground: oklch(0.93 0.003 264);
-	/* #e4e6eb - Chữ sáng */
-	--card: oklch(0.23 0.004 264.052);
-	/* #2d2f31 - Card sáng hơn nền */
-	--card-foreground: oklch(0.93 0.003 264);
-	--popover: oklch(0.23 0.004 264.052);
-	--popover-foreground: oklch(0.93 0.003 264);
-	--primary: oklch(0.574 0.195 264.364);
-	/* #1877f2 - Xanh Facebook giữ nguyên */
-	--primary-foreground: oklch(1 0 0);
-	--secondary: oklch(0.26 0.004 264);
-	--secondary-foreground: oklch(0.93 0.003 264);
-	--muted: oklch(0.26 0.004 264);
-	--muted-foreground: oklch(0.62 0.008 264);
-	/* #9ea1a6 - Xám phụ sáng hơn */
-	--accent: oklch(0.26 0.004 264);
-	--accent-foreground: oklch(0.93 0.003 264);
-	--destructive: oklch(0.704 0.191 22.216);
-	--border: oklch(0.32 0.005 264);
-	/* #3e4042 - Viền sáng hơn */
-	--input: oklch(0.32 0.005 264);
-	--ring: oklch(0.574 0.195 264.364);
-	--chart-1: oklch(0.574 0.195 264.364);
-	--chart-2: oklch(0.556 0 0);
-	--chart-3: oklch(0.439 0 0);
-	--chart-4: oklch(0.371 0 0);
-	--chart-5: oklch(0.269 0 0);
+	--background: #121715;
+	--foreground: #E2E8E4;
+	--card: #1A211E;
+	--card-foreground: #E2E8E4;
+	--popover: #1A211E;
+	--popover-foreground: #E2E8E4;
+	--primary: #588A7C;
+	--primary-foreground: #121715;
+	--secondary: #222C28;
+	--secondary-foreground: #E2E8E4;
+	--muted: #222C28;
+	--muted-foreground: #9AA8A0;
+	--accent: #202E28;
+	--accent-foreground: #E2E8E4;
+	--destructive: #D16B53;
+	--border: #2C3833;
+	--input: #2C3833;
+	--ring: #588A7C;
+	--chart-1: #588A7C;
+	--chart-2: #7DA69B;
+	--chart-3: #3B6E5F;
+	--chart-4: #9EC2B8;
+	--chart-5: #2A5245;
 
-	--sidebar: oklch(0.18 0.004 264.052);
-	--sidebar-foreground: oklch(0.93 0.003 264);
-	--sidebar-primary: oklch(0.574 0.195 264.364);
-	--sidebar-primary-foreground: oklch(1 0 0);
-	--sidebar-accent: oklch(0.26 0.004 264);
-	--sidebar-accent-foreground: oklch(0.93 0.003 264);
-	--sidebar-border: oklch(0.32 0.005 264);
-	--sidebar-ring: oklch(0.574 0.195 264.364);
+	--sidebar: #1A211E;
+	--sidebar-foreground: #E2E8E4;
+	--sidebar-primary: #588A7C;
+	--sidebar-primary-foreground: #121715;
+	--sidebar-accent: #202E28;
+	--sidebar-accent-foreground: #E2E8E4;
+	--sidebar-border: #2C3833;
+	--sidebar-ring: #588A7C;
 }
 
 @layer base {
@@ -152,4 +153,12 @@ html {
 	html {
 		@apply font-sans;
 	}
+
+	:focus-visible {
+		@apply outline-2 outline-offset-2 outline-primary;
+	}
+}
+
+.result-section-anchor {
+	scroll-margin-top: 6rem;
 }

@@ -63,3 +63,5 @@ mbti_detailed_personalities.json
 mbti_seed_personalities.py
 mbti_seed_questions.py
 testing_score_service.py
+skills-lock.json
+.agents/
