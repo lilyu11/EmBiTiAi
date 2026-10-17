@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Question } from '@/types/mbti';
 import { mbtiApi } from '@/lib/api/mbti';
-import { Loader2, AlertCircle, ArrowRight, RotateCcw } from 'lucide-react';
+import { Loader2, AlertCircle, ArrowRight, RotateCcw, SlidersHorizontal, Clock, ArrowLeft } from 'lucide-react';
 
 const LIKERT_OPTIONS = [
 	{ label: 'Rất không đồng ý', value: -2, short: 'Rất không đồng ý' },
@@ -14,8 +14,17 @@ const LIKERT_OPTIONS = [
 	{ label: 'Rất đồng ý', value: 2, short: 'Rất đồng ý' },
 ];
 
+const QUESTION_LIMIT_OPTIONS: Array<{ count: number | 'all'; title: string; time: string; desc: string }> = [
+	{ count: 30, title: '30 Câu hỏi', time: '~5 phút', desc: 'Trắc nghiệm nhanh, nắm bắt xu hướng cốt lõi.' },
+	{ count: 45, title: '45 Câu hỏi', time: '~8 phút', desc: 'Độ dài tiêu chuẩn, cân bằng độ chính xác.' },
+	{ count: 60, title: '60 Câu hỏi', time: '~12 phút', desc: 'Phân tích chi tiết và sâu sắc các trục nhận thức.' },
+	{ count: 'all', title: 'Tất cả câu hỏi', time: '~15 phút', desc: 'Độ chính xác cao với tất cả câu hỏi hệ thống.' },
+];
+
 export default function MBTITestPage() {
+	const [allQuestions, setAllQuestions] = useState<Question[]>([]);
 	const [questions, setQuestions] = useState<Question[]>([]);
+	const [selectedLimit, setSelectedLimit] = useState<number | null>(null);
 	const [answers, setAnswers] = useState<Record<number, number>>({});
 	const [loading, setLoading] = useState<boolean>(true);
 	const [submitting, setSubmitting] = useState<boolean>(false);
@@ -27,7 +36,7 @@ export default function MBTITestPage() {
 			setLoading(true);
 			setError(null);
 			const data: Question[] = await mbtiApi.getQuestions();
-			setQuestions(data);
+			setAllQuestions(data);
 		} catch (err: any) {
 			setError('Không thể tải danh sách câu hỏi từ máy chủ. Vui lòng thử lại.');
 		} finally {
@@ -38,6 +47,75 @@ export default function MBTITestPage() {
 	useEffect(() => {
 		fetchQuestions();
 	}, []);
+
+	const handleStartWithLimit = (limit: number | 'all') => {
+		const count = limit === 'all' ? allQuestions.length : Number(limit);
+
+		// Phân loại câu hỏi theo trục tính cách chính để đảm bảo phân tầng (stratified sampling) đầy đủ các trục
+		const axisMap: Record<string, Question[]> = {};
+		allQuestions.forEach((q) => {
+			const axes = Object.keys(q.weights || {});
+			if (axes.length === 0) {
+				if (!axisMap['OTHER']) axisMap['OTHER'] = [];
+				axisMap['OTHER'].push(q);
+			} else {
+				// Chọn trục có trọng số tuyệt đối lớn nhất làm trục chính
+				let primaryAxis = axes[0];
+				let maxWeight = Math.abs(q.weights[primaryAxis] || 0);
+				axes.forEach((ax) => {
+					const w = Math.abs(q.weights[ax] || 0);
+					if (w > maxWeight) {
+						maxWeight = w;
+						primaryAxis = ax;
+					}
+				});
+				if (!axisMap[primaryAxis]) axisMap[primaryAxis] = [];
+				axisMap[primaryAxis].push(q);
+			}
+		});
+
+		const axes = Object.keys(axisMap);
+		
+		// Xáo trộn ngẫu nhiên câu hỏi trong từng trục trước
+		axes.forEach((ax) => {
+			axisMap[ax].sort(() => Math.random() - 0.5);
+		});
+
+		let selected: Question[] = [];
+
+		if (count >= allQuestions.length) {
+			// Lấy toàn bộ câu hỏi và xáo trộn ngẫu nhiên
+			selected = [...allQuestions].sort(() => Math.random() - 0.5);
+		} else {
+			// Lấy đều đặn từ mỗi trục để đảm bảo đủ tất cả các giá trị trục
+			const perAxisTarget = Math.max(1, Math.floor(count / axes.length));
+			const remainingPool: Question[] = [];
+
+			axes.forEach((ax) => {
+				const group = axisMap[ax];
+				const take = Math.min(group.length, perAxisTarget);
+				selected.push(...group.slice(0, take));
+				remainingPool.push(...group.slice(take));
+			});
+
+			// Bổ sung phần còn lại từ pool chung nếu chưa đủ số lượng
+			remainingPool.sort(() => Math.random() - 0.5);
+			const needed = count - selected.length;
+			if (needed > 0) {
+				selected.push(...remainingPool.slice(0, needed));
+			} else if (selected.length > count) {
+				selected = selected.slice(0, count);
+			}
+
+			// Xáo trộn toàn bộ tập câu hỏi đã chọn để đảm bảo tính biến thiên và ngẫu nhiên
+			selected.sort(() => Math.random() - 0.5);
+		}
+
+		setQuestions(selected);
+		setSelectedLimit(selected.length);
+		setAnswers({});
+		window.scrollTo({ top: 0, behavior: 'smooth' });
+	};
 
 	const handleSelectOption = (questionId: number, value: number) => {
 		setAnswers((prev) => ({ ...prev, [questionId]: value }));
@@ -89,7 +167,7 @@ export default function MBTITestPage() {
 		);
 	}
 
-	if (error && questions.length === 0) {
+	if (error && allQuestions.length === 0) {
 		return (
 			<div className="max-w-md mx-auto py-16 text-center space-y-6">
 				<div className="w-14 h-14 rounded-2xl bg-destructive/10 text-destructive flex items-center justify-center mx-auto">
@@ -102,11 +180,60 @@ export default function MBTITestPage() {
 				<button
 					type="button"
 					onClick={fetchQuestions}
-					className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-2xl text-sm transition-all hover:opacity-95"
+					className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-2xl text-sm transition-all hover:opacity-95 cursor-pointer"
 				>
 					<RotateCcw className="w-4 h-4" />
 					<span>Thử lại</span>
 				</button>
+			</div>
+		);
+	}
+
+	if (selectedLimit === null && allQuestions.length > 0) {
+		return (
+			<div className="max-w-2xl mx-auto py-8 px-4 space-y-8 animate-in fade-in duration-300">
+				<div className="text-center space-y-3">
+					<div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-accent text-accent-foreground text-xs font-semibold">
+						<SlidersHorizontal className="w-3.5 h-3.5 text-primary" />
+						Tùy chọn bài kiểm tra
+					</div>
+					<h1 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight">
+						Chọn số lượng câu hỏi
+					</h1>
+					<p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+						Lựa chọn quy mô bài trắc nghiệm phù hợp với quỹ thời gian của bạn để bắt đầu.
+					</p>
+				</div>
+
+				<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+					{QUESTION_LIMIT_OPTIONS.map((opt) => {
+						const isAll = opt.count === 'all';
+						const actualCount = isAll ? allQuestions.length : Math.min(Number(opt.count), allQuestions.length);
+
+						return (
+							<button
+								key={String(opt.count)}
+								type="button"
+								onClick={() => handleStartWithLimit(opt.count)}
+								className="text-left bg-card border border-border p-6 rounded-3xl hover:border-primary/50 hover:shadow-sm transition-all space-y-3 group cursor-pointer relative overflow-hidden"
+							>
+								<div className="flex items-center justify-between">
+									<h3 className="font-bold text-foreground text-lg group-hover:text-primary transition-colors">
+										{opt.title}
+									</h3>
+									<span className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground bg-accent px-3 py-1 rounded-full">
+										<Clock className="w-3 h-3" />
+										{opt.time}
+									</span>
+								</div>
+
+								<p className="text-xs text-muted-foreground leading-relaxed">
+									{opt.desc} ({actualCount} câu hỏi thực tế)
+								</p>
+							</button>
+						);
+					})}
+				</div>
 			</div>
 		);
 	}
@@ -117,6 +244,16 @@ export default function MBTITestPage() {
 			<div className="bg-card border border-border p-6 sm:p-8 rounded-3xl shadow-xs space-y-5">
 				<div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
 					<div>
+						<div className="mb-2">
+							<button
+								type="button"
+								onClick={() => setSelectedLimit(null)}
+								className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors bg-secondary px-3 py-1.5 rounded-full cursor-pointer"
+							>
+								<ArrowLeft className="w-3.5 h-3.5" />
+								<span>Đổi số câu ({questions.length} câu)</span>
+							</button>
+						</div>
 						<h1 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
 							Bài Trắc Nghiệm MBTI
 						</h1>
@@ -152,15 +289,17 @@ export default function MBTITestPage() {
 			)}
 
 			{/* Question Cards with ample spacing */}
-			<div className="space-y-10" aria-label="Danh sách câu hỏi trắc nghiệm">
+			<div className="space-y-8" aria-label="Danh sách câu hỏi trắc nghiệm">
 				{questions.map((q, index) => {
 					const selectedValue = answers[q.id];
 					const isAnswered = selectedValue !== undefined;
 
 					return (
-						<fieldset
+						<div
 							key={q.id}
-							className={`p-6 sm:p-8 border rounded-3xl bg-card transition-all space-y-6 m-0 shadow-2xs ${
+							role="group"
+							aria-label={`Câu hỏi ${index + 1}`}
+							className={`p-6 sm:p-8 border rounded-3xl bg-card transition-all space-y-6 shadow-2xs ${
 								isAnswered
 									? 'border-primary/50 ring-1 ring-primary/10 bg-card'
 									: 'border-border hover:border-border/80'
@@ -170,9 +309,9 @@ export default function MBTITestPage() {
 								<span className="w-8 h-8 rounded-xl bg-secondary text-secondary-foreground text-xs font-extrabold flex items-center justify-center shrink-0 mt-0.5">
 									{index + 1}
 								</span>
-								<legend className="font-semibold text-foreground text-base sm:text-lg leading-relaxed float-none p-0">
+								<h3 className="font-semibold text-foreground text-base sm:text-lg leading-relaxed m-0 p-0">
 									{q.content}
-								</legend>
+								</h3>
 							</div>
 
 							{/* Likert Scale Choices */}
@@ -197,7 +336,7 @@ export default function MBTITestPage() {
 									);
 								})}
 							</div>
-						</fieldset>
+						</div>
 					);
 				})}
 			</div>
