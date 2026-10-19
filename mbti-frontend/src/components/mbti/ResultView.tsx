@@ -58,7 +58,7 @@ export interface ResultOut {
 }
 
 const AXIS_NAMES: Record<string, { name: string; leftLabel: string; rightLabel: string }> = {
-	EI: { name: "Năng lượng", leftLabel: "Hướng ngoại", rightLabel: "Hướng nội" },
+	EI: { name: "Năng lượng", leftLabel: "Hướng nội", rightLabel: "Hướng ngoại" },
 	SN: { name: "Tâm trí", leftLabel: "Trực giác", rightLabel: "Quan sát" },
 	TF: { name: "Bản chất", leftLabel: "Lý trí", rightLabel: "Cảm xúc" },
 	JP: { name: "Chiến thuật", leftLabel: "Nguyên tắc", rightLabel: "Linh hoạt" },
