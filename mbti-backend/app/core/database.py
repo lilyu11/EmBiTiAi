@@ -1,0 +1,33 @@
+from typing import Generator
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, declarative_base
+from app.core.config import settings
+
+is_postgres = settings.DATABASE_URL.startswith("postgres")
+is_local = "localhost" in settings.DATABASE_URL or "127.0.0.1" in settings.DATABASE_URL
+connect_args={"sslmode": "require"} if (is_postgres and not is_local) else {}
+
+# Tạo SQLAlchemy Engine
+engine = create_engine(
+	settings.DATABASE_URL,
+	# pool_pre_ping=True,         # Tự động kiểm tra và kết nối lại nếu DB bị ngắt
+	# pool_size=10,               # Số connection giữ sẵn
+	# max_overflow=15,            # Connection vượt trần tạm thời trước khi chờ pool
+	# pool_timeout=20,            # Giảm thời gian chờ khi pool cạn (default 30s)
+	# pool_recycle=1800,          # Tái tạo connection sau 30 phút - dưới giới hạn idle của Supabase
+	connect_args=connect_args,  # SSL cho Postgres trên Supabase
+	)
+
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+# Base class cho tất cả các ORM Models kế thừa
+Base = declarative_base()
+
+
+def get_db() -> Generator:
+	# Dependency cung cấp Database Session cho API endpoints
+	db = SessionLocal()
+	try:
+		yield db
+	finally:
+		db.close()

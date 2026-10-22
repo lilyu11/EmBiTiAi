@@ -1,0 +1,561 @@
+[
+  {
+    "order": 1,
+    "content": "Trong các buổi sự kiện hoặc networking, bạn thường là người chủ động tiến tới bắt chuyện với những người chưa từng quen.",
+    "weights": {
+      "EI": 1.2,
+      "JP": 0.2
+    }
+  },
+  {
+    "order": 2,
+    "content": "Sau một tuần dài làm việc nhóm hoặc giao tiếp liên tục, bạn chỉ muốn dành ngày nghỉ cuối tuần một mình để sạc lại năng lượng.",
+    "weights": {
+      "EI": -1.2
+    }
+  },
+  {
+    "order": 3,
+    "content": "Bạn có xu hướng nghĩ ra ý tưởng tốt nhất khi đang nói chuyện và trao đổi trực tiếp với người khác.",
+    "weights": {
+      "EI": 1.0,
+      "SN": 0.3
+    }
+  },
+  {
+    "order": 4,
+    "content": "Bạn thích những buổi đi cafe trò chuyện hoặc deep talk với 1-2 người bạn thân hơn là tham gia một bữa tiệc đông đúc.",
+    "weights": {
+      "EI": -1.0
+    }
+  },
+  {
+    "order": 5,
+    "content": "Môi trường càng ồn ào, náo nhiệt và đông người càng khiến bạn cảm thấy hào hứng và tràn đầy sức sống.",
+    "weights": {
+      "EI": 1.2
+    }
+  },
+  {
+    "order": 6,
+    "content": "Trong một nhóm người lạ, bạn thường giữ im lặng quan sát và đợi người khác bắt chuyện trước.",
+    "weights": {
+      "EI": -1.0,
+      "JP": -0.2
+    }
+  },
+  {
+    "order": 7,
+    "content": "Bạn thường xuyên sử dụng ngôn ngữ cơ thể, biểu cảm khuôn mặt phong phú và tông giọng đa dạng khi kể chuyện.",
+    "weights": {
+      "EI": 0.7
+    }
+  },
+  {
+    "order": 8,
+    "content": "Bạn rất kín tiếng về đời tư và hiếm khi chia sẻ cảm xúc cá nhân lên mạng xã hội hay với những người không quá thân thiết.",
+    "weights": {
+      "EI": -1.0,
+      "TF": -0.2
+    }
+  },
+  {
+    "order": 9,
+    "content": "Bạn không hề cảm thấy ngần ngại, thậm chí còn thích thú khi vô tình trở thành trung tâm của sự chú ý.",
+    "weights": {
+      "EI": 1.0
+    }
+  },
+  {
+    "order": 10,
+    "content": "Những cuộc hội thoại xã giao làm bạn cảm thấy mệt mỏi và vô vị.",
+    "weights": {
+      "EI": -0.7,
+      "SN": 0.3
+    }
+  },
+  {
+    "order": 11,
+    "content": "Trong lớp học hay cuộc họp, bạn thường là người đầu tiên giơ tay phát biểu hoặc đưa ra ý kiến trả lời.",
+    "weights": {
+      "EI": 1.0
+    }
+  },
+  {
+    "order": 12,
+    "content": "Bạn thà nhắn tin giải quyết công việc cả ngày còn hơn là phải nhấc máy lên gọi điện thoại trực tiếp.",
+    "weights": {
+      "EI": -0.7
+    }
+  },
+  {
+    "order": 13,
+    "content": "Sự im lặng tuyệt đối trong thời gian dài làm bạn cảm thấy bồn chồn và mất tập trung hơn là một quán cafe có chút tiếng ồn.",
+    "weights": {
+      "EI": 0.6
+    }
+  },
+  {
+    "order": 14,
+    "content": "Vòng tròn xã hội của bạn rất nhỏ, nhưng đó đều là những mối quan hệ vô cùng chất lượng và lâu năm.",
+    "weights": {
+      "EI": -1.2
+    }
+  },
+  {
+    "order": 15,
+    "content": "Bạn thường chủ động rủ rê mọi người đi chơi, set kèo ăn uống vào những dịp rảnh rỗi.",
+    "weights": {
+      "EI": 1.0,
+      "JP": 0.3
+    }
+  },
+  {
+    "order": 16,
+    "content": "Nếu phải làm việc độc lập mà không được giao tiếp với ai trong vài ngày, bạn sẽ cảm thấy rất cuồng chân và tụt mood.",
+    "weights": {
+      "EI": 1.0
+    }
+  },
+  {
+    "order": 17,
+    "content": "Bạn thường suy nghĩ cẩn thận và sắp xếp ý tứ trong đầu trước khi thực sự mở miệng nói ra một điều gì đó.",
+    "weights": {
+      "EI": -1.0,
+      "JP": -0.2
+    }
+  },
+  {
+    "order": 18,
+    "content": "Bạn rất giỏi trong việc kết nối mọi người lại với nhau và tạo ra bầu không khí thoải mái cho những người mới gia nhập nhóm.",
+    "weights": {
+      "EI": 1.0,
+      "TF": 0.3
+    }
+  },
+  {
+    "order": 19,
+    "content": "Tại các buổi tụ tập đông người, bạn thích ngồi một góc quan sát mọi người vui đùa hơn là trực tiếp tham gia vào các trò chơi tập thể.",
+    "weights": {
+      "EI": -1.2
+    }
+  },
+  {
+    "order": 20,
+    "content": "Bạn thích những ý tưởng mang tính thực tiễn, có thể áp dụng ngay vào hiện tại thay vì những giả thuyết viển vông về tương lai.",
+    "weights": {
+      "SN": -1.2
+    }
+  },
+  {
+    "order": 21,
+    "content": "Khi brainstorm ý tưởng, bạn thường đưa ra những góc nhìn độc lạ, phá cách và đôi khi vượt ra khỏi khuôn khổ thực tế ban đầu.",
+    "weights": {
+      "SN": 1.2,
+      "JP": 0.2
+    }
+  },
+  {
+    "order": 22,
+    "content": "Bạn tin tưởng vào những kinh nghiệm bản thân đã trải qua hoặc số liệu thực tế hơn là linh cảm hay trực giác.",
+    "weights": {
+      "SN": -1.0,
+      "TF": -0.3
+    }
+  },
+  {
+    "order": 23,
+    "content": "Trong giao tiếp, bạn rất hay sử dụng các phép ẩn dụ, nói bóng nói gió hoặc ví von để diễn đạt suy nghĩ của mình.",
+    "weights": {
+      "SN": 1.0
+    }
+  },
+  {
+    "order": 24,
+    "content": "Khi nhận một bản kế hoạch, bạn có thói quen soi rất kỹ các chi tiết tiểu tiết (lỗi type, format, số liệu nhỏ) thay vì chỉ nhìn bức tranh tổng thể.",
+    "weights": {
+      "SN": -1.0,
+      "JP": -0.3
+    }
+  },
+  {
+    "order": 25,
+    "content": "Bạn rất nhanh chán nếu phải làm một công việc có tính lặp đi lặp lại hoặc tuân theo một quy trình cứng nhắc ngày này qua ngày khác.",
+    "weights": {
+      "SN": 1.0,
+      "JP": 0.3
+    }
+  },
+  {
+    "order": 26,
+    "content": "Khi học một phần mềm hoặc môn học mới, bạn thích được hướng dẫn chi tiết theo từng bước thay vì tự mò mẫm các khái niệm chung.",
+    "weights": {
+      "SN": -1.2
+    }
+  },
+  {
+    "order": 27,
+    "content": "Bạn có khả năng nhìn ra sự liên kết ngầm giữa các sự việc dường như không liên quan gì đến nhau.",
+    "weights": {
+      "SN": 1.2
+    }
+  },
+  {
+    "order": 28,
+    "content": "Bạn có trí nhớ rất tốt về các mốc thời gian, tên người, địa điểm hoặc các sự kiện đã xảy ra trong quá khứ.",
+    "weights": {
+      "SN": -1.0
+    }
+  },
+  {
+    "order": 29,
+    "content": "Bạn thường xuyên thả hồn lơ lửng, tưởng tượng về tương lai hoặc những kịch bản không có thật ngay cả khi đang làm việc.",
+    "weights": {
+      "SN": 1.2
+    }
+  },
+  {
+    "order": 30,
+    "content": "Bạn cảm thấy khó chịu khi người khác giao việc kiểu chung chung mà không có các tiêu chí đo lường cụ thể.",
+    "weights": {
+      "SN": -1.0,
+      "JP": -0.2
+    }
+  },
+  {
+    "order": 31,
+    "content": "Đối với bạn, việc sở hữu một trí tưởng tượng phong phú quan trọng hơn nhiều so với việc có một cái đầu thực tế.",
+    "weights": {
+      "SN": 1.2
+    }
+  },
+  {
+    "order": 32,
+    "content": "Bạn thích đọc sách hoặc xem phim về tiểu sử người thật việc thật, phim tài liệu, đời sống thay vì thể loại viễn tưởng (Sci-fi) hay giả tưởng (Fantasy).",
+    "weights": {
+      "SN": -0.7
+    }
+  },
+  {
+    "order": 33,
+    "content": "Trong các cuộc tranh luận, bạn thích bàn về 'điều gì có thể xảy ra tiếp theo' hơn là 'điều gì đang hiện hữu'.",
+    "weights": {
+      "SN": 1.0
+    }
+  },
+  {
+    "order": 34,
+    "content": "Bạn rất thính nhạy với những thay đổi nhỏ của môi trường xung quanh (Ví dụ như đồng nghiệp mới đổi kiểu tóc, đồ đạc bị xê dịch).",
+    "weights": {
+      "SN": -0.7
+    }
+  },
+  {
+    "order": 35,
+    "content": "Câu chuyện của bạn thường nhảy từ chủ đề này sang chủ đề khác một cách ngẫu hứng khiến người nghe đôi khi khó theo kịp.",
+    "weights": {
+      "SN": 1.0,
+      "JP": 0.4
+    }
+  },
+  {
+    "order": 36,
+    "content": "Bạn thích áp dụng những phương pháp đã được chứng minh là thành công hơn là mạo hiểm thử nghiệm một cách làm hoàn toàn mới.",
+    "weights": {
+      "SN": -1.0,
+      "JP": -0.3
+    }
+  },
+  {
+    "order": 37,
+    "content": "Bạn luôn thích đào sâu để tìm ra tầng ý nghĩa ẩn dụ, thông điệp ngầm đằng sau một bức tranh hay một tác phẩm nghệ thuật.",
+    "weights": {
+      "SN": 1.0
+    }
+  },
+  {
+    "order": 38,
+    "content": "Bạn có xu hướng mô tả mọi thứ theo nghĩa đen, diễn đạt một cách chính xác, thẳng thắn, có sao nói vậy.",
+    "weights": {
+      "SN": -1.0,
+      "TF": -0.2
+    }
+  },
+  {
+    "order": 39,
+    "content": "Khi làm việc nhóm, bạn quan tâm đến việc duy trì không khí vui vẻ, hòa thuận hơn là tranh cãi gay gắt để tối ưu hiệu quả công việc.",
+    "weights": {
+      "TF": 1.2
+    }
+  },
+  {
+    "order": 40,
+    "content": "Bạn thà nói ra sự thật mất lòng để giải quyết triệt để vấn đề còn hơn là dùng lời lẽ hoa mỹ để bao biện.",
+    "weights": {
+      "TF": -1.2
+    }
+  },
+  {
+    "order": 41,
+    "content": "Khi đứng trước một ngã rẽ quan trọng, bạn thường quyết định bằng cách dựa vào linh cảm hơn là các bảng phân tích lợi - hại.",
+    "weights": {
+      "TF": 1.0,
+      "SN": 0.2
+    }
+  },
+  {
+    "order": 42,
+    "content": "Bất cứ khi nào phải chi một khoản tiền lớn, bạn luôn lập bảng so sánh thông số kỹ thuật, giá cả, đánh giá kỹ lưỡng thay vì mua theo cảm xúc nhất thời.",
+    "weights": {
+      "TF": -1.0,
+      "SN": -0.2
+    }
+  },
+  {
+    "order": 43,
+    "content": "Bạn dễ dàng đặt mình vào vị trí của người khác để thấu hiểu nỗi đau của họ, đôi khi đến mức tự làm bản thân buồn lây.",
+    "weights": {
+      "TF": 1.2
+    }
+  },
+  {
+    "order": 44,
+    "content": "Trong một cuộc cãi vã, bạn có khả năng 'đóng băng' cảm xúc tạm thời để lùi lại phân tích xem ai đúng ai sai một cách khách quan.",
+    "weights": {
+      "TF": -1.0
+    }
+  },
+  {
+    "order": 45,
+    "content": "Tâm trạng của bạn rất dễ bị ảnh hưởng bởi thái độ hoặc năng lượng của những người xung quanh tỏa ra.",
+    "weights": {
+      "TF": 0.7,
+      "EI": 0.3
+    }
+  },
+  {
+    "order": 46,
+    "content": "Theo bạn, pháp luật và các quy tắc phải được áp dụng công bằng và nghiêm minh cho tất cả mọi người, không có ngoại lệ cảm tính.",
+    "weights": {
+      "TF": -1.0,
+      "JP": -0.3
+    }
+  },
+  {
+    "order": 47,
+    "content": "Bạn sẵn sàng nhượng bộ hoặc chịu thiệt một chút để tránh khỏi những cuộc xung đột, đối đầu căng thẳng không đáng có.",
+    "weights": {
+      "TF": 1.0
+    }
+  },
+  {
+    "order": 48,
+    "content": "Bạn thích đóng vai 'ác' để phản biện lại các ý kiến, nhằm thử thách tính logic của một kế hoạch.",
+    "weights": {
+      "TF": -1.2,
+      "SN": 0.3
+    }
+  },
+  {
+    "order": 49,
+    "content": "Khi feedback cho người khác, bạn luôn cố gắng khen ngợi trước rồi mới nhẹ nhàng góp ý khuyết điểm để họ không bị tổn thương.",
+    "weights": {
+      "TF": 1.0
+    }
+  },
+  {
+    "order": 50,
+    "content": "Bạn cảm thấy bứt rứt và buộc phải lên tiếng nếu phát hiện ra một lỗ hổng logic trong lập luận của người khác.",
+    "weights": {
+      "TF": -1.0
+    }
+  },
+  {
+    "order": 51,
+    "content": "Bạn thường cảm thấy áy náy và tự dằn vặt rất lâu khi phải từ chối lời nhờ vả của một người bạn.",
+    "weights": {
+      "TF": 1.0
+    }
+  },
+  {
+    "order": 52,
+    "content": "Bạn đón nhận những lời chỉ trích công việc một cách khá nhẹ nhàng vì cho rằng đó là góp ý công việc, không phải ghét bỏ cá nhân.",
+    "weights": {
+      "TF": -1.0
+    }
+  },
+  {
+    "order": 53,
+    "content": "Đôi khi bạn chủ động nhận lỗi về mình ngay cả khi không hoàn toàn sai, cốt chỉ để câu chuyện kết thúc êm đẹp.",
+    "weights": {
+      "TF": 1.2
+    }
+  },
+  {
+    "order": 54,
+    "content": "Với bạn, hiệu suất công việc và sự xuất sắc là tiêu chí quan trọng hơn hẳn so với việc mọi người trong team có thân thiết với nhau hay không.",
+    "weights": {
+      "TF": -1.2
+    }
+  },
+  {
+    "order": 55,
+    "content": "Bạn được mọi người đánh giá là một người ấm áp, biết lắng nghe và luôn là chỗ dựa tinh thần cho bạn bè.",
+    "weights": {
+      "TF": 1.0
+    }
+  },
+  {
+    "order": 56,
+    "content": "Lòng tự trọng của bạn gắn liền với năng lực cá nhân, sự thông minh và thành tựu bạn đạt được hơn là việc được bao nhiêu người yêu mến.",
+    "weights": {
+      "TF": -0.7
+    }
+  },
+  {
+    "order": 57,
+    "content": "Khi đưa ra quyết định, câu hỏi đầu tiên xuất hiện trong đầu bạn là: 'Việc này sẽ ảnh hưởng đến cảm xúc của những người xung quanh thế nào?'.",
+    "weights": {
+      "TF": 1.2
+    }
+  },
+  {
+    "order": 58,
+    "content": "Deadline đối với bạn là ranh giới bất khả xâm phạm, bạn luôn cố gắng hoàn thành công việc trước thời hạn ít nhất 1-2 ngày.",
+    "weights": {
+      "JP": -1.2
+    }
+  },
+  {
+    "order": 59,
+    "content": "Bạn đặc biệt yêu thích những chuyến đi phượt ngẫu hứng, chỉ việc xách ba lô lên và đi mà không cần đặt trước khách sạn hay vé tàu.",
+    "weights": {
+      "JP": 1.2,
+      "SN": 0.2
+    }
+  },
+  {
+    "order": 60,
+    "content": "Ghi chép to-do list hoặc sử dụng các ứng dụng quản lý lịch trình (Google Calendar, Notion) là thói quen sống còn của bạn mỗi ngày.",
+    "weights": {
+      "JP": -1.2
+    }
+  },
+  {
+    "order": 61,
+    "content": "Bạn rất ghét phải chốt lịch hẹn cố định từ quá sớm, bạn luôn muốn để ngỏ các lựa chọn cho đến phút chót.",
+    "weights": {
+      "JP": 1.0
+    }
+  },
+  {
+    "order": 62,
+    "content": "Không gian làm việc hoặc phòng ngủ của bạn luôn được phân loại và sắp xếp ngăn nắp, đồ đạc để đúng vị trí quy định.",
+    "weights": {
+      "JP": -1.0,
+      "SN": -0.2
+    }
+  },
+  {
+    "order": 63,
+    "content": "Trí não của bạn chỉ thực sự bùng nổ và đạt công suất tối đa khi deadline đang kề sát cổ, như kiểu 'nước đến chân mới nhảy'.",
+    "weights": {
+      "JP": 1.2
+    }
+  },
+  {
+    "order": 64,
+    "content": "Lịch trình đi du lịch của bạn luôn được thiết kế chi tiết từng giờ: 7h ăn gì, 8h check-in ở đâu, 12h đi xe khách nào.",
+    "weights": {
+      "JP": -1.0
+    }
+  },
+  {
+    "order": 65,
+    "content": "Những quy định khắt khe về thời gian (Ví dụ như chấm công đúng 8h00 sáng) làm bạn cảm thấy ngột ngạt và giảm sút sự sáng tạo.",
+    "weights": {
+      "JP": 1.0,
+      "SN": 0.3
+    }
+  },
+  {
+    "order": 66,
+    "content": "Bạn không thể thực sự xõa (thư giãn) nếu như trong danh sách việc cần làm hôm nay vẫn còn một task chưa được gạch đi.",
+    "weights": {
+      "JP": -1.2
+    }
+  },
+  {
+    "order": 67,
+    "content": "Đối với bạn, ranh giới giữa lúc làm việc và lúc giải trí khá mờ nhạt. Bạn có thể đang làm việc thì xen ngang chơi game, rồi lại quay lại làm tiếp.",
+    "weights": {
+      "JP": 1.0
+    }
+  },
+  {
+    "order": 68,
+    "content": "Bạn luôn cố gắng đến sớm hơn giờ hẹn ít nhất 10-15 phút để đề phòng mọi sự cố bất trắc trên đường.",
+    "weights": {
+      "JP": -1.0
+    }
+  },
+  {
+    "order": 69,
+    "content": "Bạn rất hay thay đổi kế hoạch vào phút chót nếu bất chợt nảy ra một ý tưởng khác thú vị hơn.",
+    "weights": {
+      "JP": 1.2
+    }
+  },
+  {
+    "order": 70,
+    "content": "Khi tiếp nhận một dự án khổng lồ, phản xạ đầu tiên của bạn là 'chẻ' nhỏ nó ra thành từng cột mốc và phân bổ thời gian cụ thể.",
+    "weights": {
+      "JP": -1.2,
+      "TF": -0.2
+    }
+  },
+  {
+    "order": 71,
+    "content": "Bạn có thói quen bắt đầu dở dang rất nhiều sở thích hoặc dự án cùng lúc nhưng lại hiếm khi kiên trì đi đến tận cùng của một cái nào.",
+    "weights": {
+      "JP": 1.0,
+      "SN": 0.3
+    }
+  },
+  {
+    "order": 72,
+    "content": "Bạn mong muốn nhanh chóng đưa ra được quyết định cuối cùng để đóng lại vấn đề và chuyển sang việc khác.",
+    "weights": {
+      "JP": -1.0
+    }
+  },
+  {
+    "order": 73,
+    "content": "Bạn đánh giá cao một môi trường làm việc linh động về mặt thời gian, miễn là xong việc thay vì phải ngồi đúng giờ hành chính.",
+    "weights": {
+      "JP": 1.0
+    }
+  },
+  {
+    "order": 74,
+    "content": "Bạn cực kỳ ghét những sự kiện bất ngờ ngoài dự kiến. Bạn muốn biết rõ mình đang bước vào cái gì.",
+    "weights": {
+      "JP": -1.0,
+      "SN": -0.3
+    }
+  },
+  {
+    "order": 75,
+    "content": "Bạn phản ứng cực kỳ nhanh nhạy và thích nghi dễ dàng khi hoàn cảnh thay đổi đột ngột làm phá sản kế hoạch ban đầu.",
+    "weights": {
+      "JP": 1.2
+    }
+  },
+  {
+    "order": 76,
+    "content": "Nếu có một chuyến bay vào cuối tuần, bạn thường chuẩn bị, đóng gói hành lý và kiểm tra giấy tờ từ giữa tuần để đảm bảo an tâm.",
+    "weights": {
+      "JP": -1.0
+    }
+  }
+]
